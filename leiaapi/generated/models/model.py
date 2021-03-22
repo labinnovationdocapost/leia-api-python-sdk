@@ -40,6 +40,7 @@ class Model(object):
         'name': 'str',
         'output_format': 'object',
         'short_name': 'str',
+        'md5sum': 'str',
         'size': 'float',
         'speed': 'Speed',
         'tags': 'list[str]'
@@ -58,12 +59,13 @@ class Model(object):
         'name': 'name',
         'output_format': 'output_format',
         'short_name': 'short_name',
+        'md5sum': 'md5sum',
         'size': 'size',
         'speed': 'speed',
         'tags': 'tags'
     }
 
-    def __init__(self, allow_all_applications=None, allowed_application_ids=None, application_id=None, creation_time=None, description=None, documentation=None, id=None, input_types=None, model_type=None, name=None, output_format=None, short_name=None, size=None, speed=None, tags=None):  # noqa: E501
+    def __init__(self, allow_all_applications=None, allowed_application_ids=None, application_id=None, creation_time=None, description=None, documentation=None, id=None, input_types=None, model_type=None, name=None, output_format=None, short_name=None, md5sum=None, size=None, speed=None, tags=None):  # noqa: E501
         """Model - a model defined in Swagger"""  # noqa: E501
         self._allow_all_applications = None
         self._allowed_application_ids = None
@@ -77,6 +79,7 @@ class Model(object):
         self._name = None
         self._output_format = None
         self._short_name = None
+        self._md5sum = None
         self._size = None
         self._speed = None
         self._tags = None
@@ -100,6 +103,7 @@ class Model(object):
             self.output_format = output_format
         if short_name is not None:
             self.short_name = short_name
+        self.md5sum = md5sum
         self.size = size
         if speed is not None:
             self.speed = speed
@@ -367,6 +371,29 @@ class Model(object):
         """
 
         self._short_name = short_name
+
+    @property
+    def md5sum(self):
+        """Gets the size of this Model.  # noqa: E501
+
+
+        :return: The size of this Model.  # noqa: E501
+        :rtype: str
+        """
+        return self._md5sum
+
+    @md5sum.setter
+    def md5sum(self, md5sum):
+        """Sets the md5sum of this Model.
+
+
+        :param md5sum: The md5sum of this Model.  # noqa: E501
+        :type: str
+        """
+        # if md5sum is None:
+        #     raise ValueError("Invalid value for `md5sum`, must not be `None`")  # noqa: E501
+
+        self._md5sum = md5sum
 
     @property
     def size(self):

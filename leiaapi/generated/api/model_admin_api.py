@@ -131,7 +131,7 @@ class ModelAdminApi(object):
             path_params['model_id'] = params['model_id']  # noqa: E501
         if 'document_ids' in params:
             path_params['document_ids'] = params['document_ids']  # noqa: E501
-            collection_formats['document_ids'] = 'multi'  # noqa: E501
+            collection_formats['document_ids'] = ''  # noqa: E501
 
         query_params = []
         if 'tag' in params:

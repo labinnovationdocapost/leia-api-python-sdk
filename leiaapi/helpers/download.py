@@ -9,20 +9,18 @@ from urllib3 import HTTPResponse
 from leiaapi.generated.api.application_admin_api import ApplicationAdminApi
 from leiaapi.generated.api.model_admin_api import ModelAdminApi
 from leiaapi.generated.api_client import ApiClient
-from leiaapi.generated.models.model import Model
 from leiaapi.generated.models.application import Application
-from leiaapi.helpers.session import SessionManager
+from leiaapi.generated.models.model import Model
+from leiaapi.generated.rest import ApiException
 
 logger = logging.getLogger(__name__)
 
 
-class FileIncompleteError(Exception):
+class FileIncompleteError(BaseException):
     pass
 
 
-
-
-def download_model(token: str, model: Union[Model, Tuple[str, str], Tuple[str, str, Optional[int]]], save_folder: Optional[Union[Path, str]] = None, overwrite: bool = True, use_tqdm: bool = True, client: Optional[ApiClient] = None,
+def download_model(token: str, model: Union[Model, Tuple[str, str], Tuple[str, str, Optional[int]]], save_folder: Optional[Union[Path, str]] = None, overwrite: bool = False, use_tqdm: bool = True, client: Optional[ApiClient] = None,
                    fn_filename: Callable[[Union[Model, Tuple[str, str], Tuple[str, str, Optional[int]]]], Union[str, Path]] = lambda model: f"{model.name}.model"):
     if isinstance(model, Model):
         model_id = model.id
@@ -39,14 +37,6 @@ def download_model(token: str, model: Union[Model, Tuple[str, str], Tuple[str, s
 
     file_name = fn_filename(model)
     api = ModelAdminApi(client)
-    # if self.allowed_models is not None and len(self.allowed_models) > 0 \
-    #         and model_id not in self.allowed_models \
-    #         and model["name"] not in self.allowed_models \
-    #         and (("short_name" in model and model["short_name"] not in self.allowed_models) or "short_name" not in model):
-    #     logger.info(f"skip download {model_id}|{model['name']} not in {self.allowed_models}")
-    #     return None
-
-    # parent_folder = Path(save_folder) / f'{application_id}-{application_name}'
 
     if save_folder is not None:
         if not isinstance(save_folder, Path):
@@ -100,17 +90,13 @@ def download_model(token: str, model: Union[Model, Tuple[str, str], Tuple[str, s
 def read_stream(resp: HTTPResponse, stream, use_tqdm):
     total_size = int(resp.headers.get('content-length', 0))
 
-    t = tqdm(total=total_size, unit='iB', unit_scale=True, disable=not use_tqdm, unit_divisor=1024)
+    with tqdm(total=total_size, unit='iB', unit_scale=True, disable=not use_tqdm, unit_divisor=1024) as t:
+        remaining = total_size
 
-    remaining = total_size
-
-    for block in resp.stream(32768):
-        remaining -= len(block)
-        t.update(len(block))
-        stream.write(block)
-
-    t.refresh()
-    t.close()
+        for block in resp.stream(32768):
+            remaining -= len(block)
+            t.update(len(block))
+            stream.write(block)
 
     if remaining > 0:
         raise FileIncompleteError(f"Missing {remaining} Bytes")
@@ -122,7 +108,12 @@ def get_all_models(token: str, client: Optional[ApiClient] = None) -> List[Model
     model_api = ModelAdminApi(client)
     status_code = None
     while len(models) < total or total < 0:
-        resp, status_code, headers = model_api.admin_get_models_with_http_info(token, offset=len(models))
+        try:
+            resp, status_code, headers = model_api.admin_get_models_with_http_info(token, offset=len(models))
+        except ApiException as e:
+            if e.status == 404:
+                logger.warning("API return a 404, maybe because the URl is wrong or because there is no model available")
+                return []
 
         if status_code != 200:
             raise Exception(f'GET {resp.url} FAILED: {status_code}')
@@ -138,12 +129,12 @@ def get_all_models(token: str, client: Optional[ApiClient] = None) -> List[Model
     return models
 
 
-def download_models(token, save_folder: Optional[Union[Path, str]] = None, whitelist: Set[str] = (), blacklist: Set[str] = (), overwrite: bool = True,
+def download_models(token, save_folder: Optional[Union[Path, str]] = None, whitelist: Set[str] = (), blacklist: Set[str] = (), overwrite: bool = False,
                     use_tqdm: bool = True, keep_model: bool = True, stop_if_error: bool = False, client: Optional[ApiClient] = None,
                     fn_subfolder: Callable[[Application, Model], Union[str, Path]] = lambda application, model: application.application_name,
                     fn_filename: Callable[[Union[Model, Tuple[str, str], Tuple[str, str, Optional[int]]]], Union[str, Path]] = lambda model: f"{model.name}.model"):
-    if len(whitelist) > 0 and len(blacklist) > 0:
-        raise ValueError("whitelist and blacklist cannot be set at the same time")
+    # if len(whitelist) > 0 and len(blacklist) > 0:
+    #     raise ValueError("whitelist and blacklist cannot be set at the same time")
 
     application_api = ApplicationAdminApi(client)
     applications: Dict[str, Application] = {app.id: app for app in application_api.admin_get_applications(token)}
@@ -154,9 +145,9 @@ def download_models(token, save_folder: Optional[Union[Path, str]] = None, white
             save_folder = Path(save_folder)
 
     if whitelist:
-        models = [model for model in models if len({model.name, model.short_name, model.id}.intersection(whitelist)) > 0]
+        models = [model for model in models if len({model.name, model.short_name, model.id, model.md5sum}.intersection(whitelist)) > 0]
     if blacklist:
-        models = [model for model in models if len({model.name, model.short_name, model.id}.intersection(whitelist)) == 0]
+        models = [model for model in models if len({model.name, model.short_name, model.id, model.md5sum}.intersection(blacklist)) == 0]
 
     for model in models:
         try:

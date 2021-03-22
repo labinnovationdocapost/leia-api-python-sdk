@@ -1155,7 +1155,7 @@ class DocumentApi(object):
         path_params = {}
         if 'document_ids' in params:
             path_params['document_ids'] = params['document_ids']  # noqa: E501
-            collection_formats['document_ids'] = 'multi'  # noqa: E501
+            collection_formats['document_ids'] = ''  # noqa: E501
         if 'output_type' in params:
             path_params['output_type'] = params['output_type']  # noqa: E501
 
