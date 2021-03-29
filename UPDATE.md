@@ -17,6 +17,6 @@
 - `python3 -m pip install --upgrade build`
 - `python3 -m pip install --user --upgrade twine`
 - `python3 -m build`
-- `python3 -m twine upload --repository pipy dist/*`
-- For the field `Enter your username`, put `__token`
+- `python3 -m twine upload --repository pypi dist/*`
+- For the field `Enter your username`, put `__token__`
 - For the field `Enter your password`, put the token you have generated on the pypi platform
