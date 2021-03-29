@@ -23,7 +23,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import leiaapi/generated 
+import leiaapi.generated 
 ```
 
 ### Setuptools
@@ -37,7 +37,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import leiaapi/generated
+import leiaapi.generated
 ```
 
 ## Getting Started
@@ -47,15 +47,15 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
-body = leiaapi/generated.Object() # Object | The prediction that should be associated to document in this annotation, in free form json
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
+body = leiaapi.generated.Object() # Object | The prediction that should be associated to document in this annotation, in free form json
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
-annotation_type = leiaapi/generated.AnnotationTypes() # AnnotationTypes | The type of the annotation
+annotation_type = leiaapi.generated.AnnotationTypes() # AnnotationTypes | The type of the annotation
 document_id = 'document_id_example' # str | The id of the document to annotate
 name = 'name_example' # str | The name of the annotation (for information purposes only) (optional)
 tags = ['tags_example'] # list[str] | The tags of the annotation (optional)
@@ -68,7 +68,7 @@ except ApiException as e:
     print("Exception when calling AnnotationApi->create_annotation: %s\n" % e)
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation (for information purposes only)
 
@@ -79,7 +79,7 @@ except ApiException as e:
     print("Exception when calling AnnotationApi->delete_annotation: %s\n" % e)
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation (for information purposes only)
 
@@ -91,10 +91,10 @@ except ApiException as e:
     print("Exception when calling AnnotationApi->get_annotation: %s\n" % e)
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | If specified, filters the annotations id (optional)
-annotation_type = leiaapi/generated.AnnotationTypes() # AnnotationTypes | If specified, filters the annotations by type (optional)
+annotation_type = leiaapi.generated.AnnotationTypes() # AnnotationTypes | If specified, filters the annotations by type (optional)
 name = 'name_example' # str | If specified, filters the annotations by name (optional)
 tags = ['tags_example'] # list[str] | If specified, filters the annotations by tag (optional)
 document_id = 'document_id_example' # str | If specified, filters the annotations attached to a given document (optional)
@@ -111,7 +111,7 @@ except ApiException as e:
     print("Exception when calling AnnotationApi->get_annotations: %s\n" % e)
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation
 tag = 'tag_example' # str | The tag to add to the annotation
@@ -124,7 +124,7 @@ except ApiException as e:
     print("Exception when calling AnnotationApi->tag_annotation: %s\n" % e)
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation
 tag = 'tag_example' # str | The tag to delete from the annotation
@@ -136,8 +136,8 @@ except ApiException as e:
     print("Exception when calling AnnotationApi->untag_annotation: %s\n" % e)
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi(leiaapi/generated.ApiClient(configuration))
-body = leiaapi/generated.Object() # Object | The new prediction that should be associated to document in this annotation, in free form json
+api_instance = leiaapi.generated.AnnotationApi(leiaapi.generated.ApiClient(configuration))
+body = leiaapi.generated.Object() # Object | The new prediction that should be associated to document in this annotation, in free form json
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation to modify
 name = 'name_example' # str | The new name of the annotation (won't change if not set) (optional)

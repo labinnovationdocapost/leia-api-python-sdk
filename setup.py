@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages  # noqa: H301
 
-NAME = "leia-api"
+NAME = "leia-api-sdk"
 VERSION = "1.0.2"
 # To install the library, run the following
 #
