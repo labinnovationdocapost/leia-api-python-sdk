@@ -31,7 +31,7 @@ class Annotation(object):
         'annotation_type': 'AnnotationTypes',
         'application_id': 'str',
         'creation_time': 'datetime',
-        'document_ids': 'str',
+        'document_id': 'str',
         'id': 'str',
         'name': 'str',
         'prediction': 'object',
@@ -42,19 +42,19 @@ class Annotation(object):
         'annotation_type': 'annotation_type',
         'application_id': 'application_id',
         'creation_time': 'creation_time',
-        'document_ids': 'document_ids',
+        'document_id': 'document_id',
         'id': 'id',
         'name': 'name',
         'prediction': 'prediction',
         'tags': 'tags'
     }
 
-    def __init__(self, annotation_type=None, application_id=None, creation_time=None, document_ids=None, id=None, name=None, prediction=None, tags=None):  # noqa: E501
+    def __init__(self, annotation_type=None, application_id=None, creation_time=None, document_id=None, id=None, name=None, prediction=None, tags=None):  # noqa: E501
         """Annotation - a model defined in Swagger"""  # noqa: E501
         self._annotation_type = None
         self._application_id = None
         self._creation_time = None
-        self._document_ids = None
+        self._document_id = None
         self._id = None
         self._name = None
         self._prediction = None
@@ -63,8 +63,8 @@ class Annotation(object):
         self.annotation_type = annotation_type
         self.application_id = application_id
         self.creation_time = creation_time
-        if document_ids is not None:
-            self.document_ids = document_ids
+        if document_id is not None:
+            self.document_id = document_id
         self.id = id
         if name is not None:
             self.name = name
@@ -143,17 +143,17 @@ class Annotation(object):
         self._creation_time = creation_time
 
     @property
-    def document_ids(self):
+    def document_id(self):
         """Gets the document_ids of this Annotation.  # noqa: E501
 
 
         :return: The document_ids of this Annotation.  # noqa: E501
         :rtype: str
         """
-        return self._document_ids
+        return self._document_id
 
-    @document_ids.setter
-    def document_ids(self, document_ids):
+    @document_id.setter
+    def document_id(self, document_ids):
         """Sets the document_ids of this Annotation.
 
 
@@ -161,7 +161,7 @@ class Annotation(object):
         :type: str
         """
 
-        self._document_ids = document_ids
+        self._document_id = document_ids
 
     @property
     def id(self):

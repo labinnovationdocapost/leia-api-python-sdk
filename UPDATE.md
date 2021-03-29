@@ -11,3 +11,12 @@
   If you are using git, you can roll back the file to its original state
 - Take caution of the file which will be overwritten (all files in leiaapi/generated + setup.py, README.md, ...)
 - Replace every `collection_formats['document_ids'] = 'multi'` for `collection_formats['document_ids'] = ''`
+
+## Deploy
+- Change version in setup.py
+- `python3 -m pip install --upgrade build`
+- `python3 -m pip install --user --upgrade twine`
+- `python3 -m build`
+- `python3 -m twine upload --repository pipy dist/*`
+- For the field `Enter your username`, put `__token`
+- For the field `Enter your password`, put the token you have generated on the pypi platform

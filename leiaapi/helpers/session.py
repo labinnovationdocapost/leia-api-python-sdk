@@ -24,8 +24,8 @@ class SessionManager:
 
     def login(self):
         login: LoginToken = self.application_api.login_application(self.api_key)
-        self.application = login.application
-        self.token = login.token
+        self.application: Optional[Application] = login.application
+        self.token: Optional[ApiClient] = login.token
         return self
 
     def renew(self):
