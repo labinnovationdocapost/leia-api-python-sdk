@@ -78,7 +78,8 @@ class SessionManager:
         return self
 
     def logout(self):
-        self.scheduler.cancel()
+        if self.scheduler is not None:
+            self.scheduler.cancel()
         self._application_api.logout_application(self.token)
         self._token = None
         return self
