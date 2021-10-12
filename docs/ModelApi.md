@@ -1,4 +1,4 @@
-# leiaapi/generated.ModelApi
+# leiaapi.generated.ModelApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**untag_model**](ModelApi.md#untag_model) | **DELETE** /model/{model_id}/tag/{tag} | Untags a model
 
 # **apply_model_async**
-> Job apply_model_async(token, model_id, document_ids, body=body, tag=tag, format_type=format_type, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, model_params=model_params)
+> Job apply_model_async(token, model_id, document_ids, body=body, tag=tag, format_type=format_type, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, model_params=model_params, block_processing=block_processing)
 
 Asynchronously applies a model on documents
 
@@ -22,26 +22,27 @@ Asynchronously applies an accessible model on accessible documents and returns a
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ModelApi()
+api_instance = leiaapi.generated.ModelApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 model_id = 'model_id_example' # str | The id or the short name of the model to apply on the document
 document_ids = ['document_ids_example'] # list[str] | Comma separated list of document ids to process
-body = leiaapi/generated.ApplyBody() # ApplyBody | All the previous query parameters can also be passed as JSON in the body of the request (optional)
+body = leiaapi.generated.ApplyBody() # ApplyBody | All the previous query parameters can also be passed as JSON in the body of the request (optional)
 tag = 'tag_example' # str | The tag of the documents to process. If tag is present, document_ids should contain a single value, and the documents processed will be those where original_id=document_ids[0] and that contain the specified tag (optional)
-format_type = leiaapi/generated.FormatTypes() # FormatTypes | The format in which the data should be returned. If empty, will return an array of key-value items. If it is classification, the result will be a Classification object. (optional)
+format_type = leiaapi.generated.FormatTypes() # FormatTypes | The format in which the data should be returned. If empty, will return an array of key-value items. If it is classification, the result will be a Classification object. (optional)
 execute_after_id = 'execute_after_id_example' # str | The id of a job that must be in PROCESSED status before this one can be started (used to chain jobs even before the first ones are terminated). If the referenced job becomes FAILED or is CANCELED, this one will fail (optional)
 page_range = 'page_range_example' # str | The pages that should be used in previous job to process this one. Can only be used if execute_after_id is not null. Pages are indexed from 0. Syntax is the same as Python slices syntax (https://docs.python.org/3/whatsnew/2.3.html#extended-slices). Examples :   * Single positive integer : keep only this page (example 4 will keep only page 5 (Remember, pages are indexed from 0))   * Single negative integer : keep only this page, but starting from the end (example -4 will keep only page 7 if there are 10 total pages)   * Range (x:y) : keep only this range of pages (Including x but excluding y, indexed from 0)     Examples       * 2: will keep all pages starting from page 3       * :5 will keep only pages 1 to 5       * 2:5 will keep only pages 3, 4 and 5       * -4: will keep only pages 7 to 10 if there are 10 total pages)       * :-2 will keep only pages 1 to 8 if there are 10 total pages)       * -4:-2 will keep only pages 7 and 8 if there are 10 total pages)   * Stride (::w) : Keep 1 page every w pages starting at the first one (example ::2 will keep only odd pages)   * Range and stride (x:y:w) : Keep 1 page every w pages within range (x:y) (example 1::2 will keep only even pages)  You can use multiple ranges of page at once, comma separated (For example, 0,2:5,-2:-1 keeps the 1st page, plus pages 3->5, plus the second to last page)  (optional)
 callback_url = 'callback_url_example' # str | Callback URL that should be called when the job becomes PROCESSED/FAILED/CANCELED. This URL will be called with a HTTP POST method, and the Job object as the payload. Callback server must answer with either a 200 or 204 HTTP response, to acknowledge the callback. Any other response code will be considered as a failure to call the callback. (optional)
 model_params = NULL # object | Additional parameters that will be passed as is to the model (optional)
+block_processing = true # bool | If true, blocks processing on the job until /job/{id}/start is called. Default is false (optional)
 
 try:
     # Asynchronously applies a model on documents
-    api_response = api_instance.apply_model_async(token, model_id, document_ids, body=body, tag=tag, format_type=format_type, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, model_params=model_params)
+    api_response = api_instance.apply_model_async(token, model_id, document_ids, body=body, tag=tag, format_type=format_type, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, model_params=model_params, block_processing=block_processing)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ModelApi->apply_model_async: %s\n" % e)
@@ -61,6 +62,7 @@ Name | Type | Description  | Notes
  **page_range** | **str**| The pages that should be used in previous job to process this one. Can only be used if execute_after_id is not null. Pages are indexed from 0. Syntax is the same as Python slices syntax (https://docs.python.org/3/whatsnew/2.3.html#extended-slices). Examples :   * Single positive integer : keep only this page (example 4 will keep only page 5 (Remember, pages are indexed from 0))   * Single negative integer : keep only this page, but starting from the end (example -4 will keep only page 7 if there are 10 total pages)   * Range (x:y) : keep only this range of pages (Including x but excluding y, indexed from 0)     Examples       * 2: will keep all pages starting from page 3       * :5 will keep only pages 1 to 5       * 2:5 will keep only pages 3, 4 and 5       * -4: will keep only pages 7 to 10 if there are 10 total pages)       * :-2 will keep only pages 1 to 8 if there are 10 total pages)       * -4:-2 will keep only pages 7 and 8 if there are 10 total pages)   * Stride (::w) : Keep 1 page every w pages starting at the first one (example ::2 will keep only odd pages)   * Range and stride (x:y:w) : Keep 1 page every w pages within range (x:y) (example 1::2 will keep only even pages)  You can use multiple ranges of page at once, comma separated (For example, 0,2:5,-2:-1 keeps the 1st page, plus pages 3-&gt;5, plus the second to last page)  | [optional] 
  **callback_url** | **str**| Callback URL that should be called when the job becomes PROCESSED/FAILED/CANCELED. This URL will be called with a HTTP POST method, and the Job object as the payload. Callback server must answer with either a 200 or 204 HTTP response, to acknowledge the callback. Any other response code will be considered as a failure to call the callback. | [optional] 
  **model_params** | [**object**](.md)| Additional parameters that will be passed as is to the model | [optional] 
+ **block_processing** | **bool**| If true, blocks processing on the job until /job/{id}/start is called. Default is false | [optional] 
 
 ### Return type
 
@@ -88,12 +90,12 @@ Get a model in the system that the application can access
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ModelApi()
+api_instance = leiaapi.generated.ModelApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 model_id = 'model_id_example' # str | The id or the short name of the model to get
 
@@ -138,19 +140,19 @@ Lists models corresponding to the filters that the application can access
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ModelApi()
+api_instance = leiaapi.generated.ModelApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 model_id = 'model_id_example' # str | Filter by id (optional)
-model_type = leiaapi/generated.ModelTypes() # ModelTypes | Filter by type (optional)
+model_type = leiaapi.generated.ModelTypes() # ModelTypes | Filter by type (optional)
 name = 'name_example' # str | Filter by name (optional)
 short_name = 'short_name_example' # str | Filter by short name (optional)
 description = 'description_example' # str | Gets models that contain this string in their description (optional)
-input_types = [leiaapi/generated.ModelInputTypes()] # list[ModelInputTypes] | Filter by input type (optional)
+input_types = [leiaapi.generated.ModelInputTypes()] # list[ModelInputTypes] | Filter by input type (optional)
 tags = ['tags_example'] # list[str] | If specified, filters the models by tag (optional)
 created_after = '2013-10-20T19:20:30+01:00' # datetime | If specified, keeps only models created after given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss) (optional)
 created_before = '2013-10-20T19:20:30+01:00' # datetime | If specified, keeps only models created before given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss) (optional)
@@ -212,12 +214,12 @@ Tags a model
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ModelApi()
+api_instance = leiaapi.generated.ModelApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 model_id = 'model_id_example' # str | The id of the model
 tag = 'tag_example' # str | The tag to add to the model
@@ -264,16 +266,16 @@ Asynchronously trains a model on accessible documents and returns a Job, that wi
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ModelApi()
+api_instance = leiaapi.generated.ModelApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 model_module = 'model_module_example' # str | The module name of the model to train on documents
 documents_tag = 'documents_tag_example' # str | The tag of the documents to train with
-body = leiaapi/generated.TrainBody() # TrainBody | All the previous query parameters can also be passed as JSON in the body of the request (optional)
+body = leiaapi.generated.TrainBody() # TrainBody | All the previous query parameters can also be passed as JSON in the body of the request (optional)
 model_name = 'model_name_example' # str | The future name of the model in database (optional)
 short_name = 'short_name_example' # str | The new short name of the model (optional)
 description = 'description_example' # str | The description of the model (optional)
@@ -338,12 +340,12 @@ Untags a model
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ModelApi()
+api_instance = leiaapi.generated.ModelApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 model_id = 'model_id_example' # str | The id of the model
 tag = 'tag_example' # str | The tag to delete from the model

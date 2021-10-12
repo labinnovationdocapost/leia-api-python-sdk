@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **extension** | **str** |  | [optional] 
 **filename** | **str** |  | 
 **id** | **str** |  | 
+**md5sum** | **str** | The MD5 sum of the document | [optional] 
 **mime_type** | **str** |  | [optional] 
 **original_id** | **str** | If this document is the result of a conversion, will contain the id of the original document | [optional] 
 **page** | **int** | The page represented by this document (only if it is a sub document of a multi page document such as a PDF) | [optional] 

@@ -1,4 +1,4 @@
-# leiaapi/generated.AnnotationApi
+# leiaapi.generated.AnnotationApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
@@ -23,15 +23,15 @@ Creates an annotation
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
-body = leiaapi/generated.Object() # Object | The prediction that should be associated to document in this annotation, in free form json
+api_instance = leiaapi.generated.AnnotationApi()
+body = NULL # object | The prediction that should be associated to document in this annotation, in free form json
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
-annotation_type = leiaapi/generated.AnnotationTypes() # AnnotationTypes | The type of the annotation
+annotation_type = leiaapi.generated.AnnotationTypes() # AnnotationTypes | The type of the annotation
 document_id = 'document_id_example' # str | The id of the document to annotate
 name = 'name_example' # str | The name of the annotation (for information purposes only) (optional)
 tags = ['tags_example'] # list[str] | The tags of the annotation (optional)
@@ -48,7 +48,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Object**](Object.md)| The prediction that should be associated to document in this annotation, in free form json | 
+ **body** | [**object**](object.md)| The prediction that should be associated to document in this annotation, in free form json | 
  **token** | **str**| The login token obtained via GET /login/{api_key} | 
  **annotation_type** | [**AnnotationTypes**](.md)| The type of the annotation | 
  **document_id** | **str**| The id of the document to annotate | 
@@ -81,12 +81,12 @@ Deletes an annotation
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
+api_instance = leiaapi.generated.AnnotationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation (for information purposes only)
 
@@ -130,12 +130,12 @@ Retrieves an annotation
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
+api_instance = leiaapi.generated.AnnotationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation (for information purposes only)
 
@@ -180,15 +180,15 @@ Retrieves annotations
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
+api_instance = leiaapi.generated.AnnotationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | If specified, filters the annotations id (optional)
-annotation_type = leiaapi/generated.AnnotationTypes() # AnnotationTypes | If specified, filters the annotations by type (optional)
+annotation_type = leiaapi.generated.AnnotationTypes() # AnnotationTypes | If specified, filters the annotations by type (optional)
 name = 'name_example' # str | If specified, filters the annotations by name (optional)
 tags = ['tags_example'] # list[str] | If specified, filters the annotations by tag (optional)
 document_id = 'document_id_example' # str | If specified, filters the annotations attached to a given document (optional)
@@ -246,12 +246,12 @@ Tags an annotation
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
+api_instance = leiaapi.generated.AnnotationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation
 tag = 'tag_example' # str | The tag to add to the annotation
@@ -298,12 +298,12 @@ Untags an annotation
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
+api_instance = leiaapi.generated.AnnotationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation
 tag = 'tag_example' # str | The tag to delete from the annotation
@@ -349,13 +349,13 @@ Updates an annotation
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.AnnotationApi()
-body = leiaapi/generated.Object() # Object | The new prediction that should be associated to document in this annotation, in free form json
+api_instance = leiaapi.generated.AnnotationApi()
+body = NULL # object | The new prediction that should be associated to document in this annotation, in free form json
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 annotation_id = 'annotation_id_example' # str | The id of the annotation to modify
 name = 'name_example' # str | The new name of the annotation (won't change if not set) (optional)
@@ -372,7 +372,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Object**](Object.md)| The new prediction that should be associated to document in this annotation, in free form json | 
+ **body** | [**object**](object.md)| The new prediction that should be associated to document in this annotation, in free form json | 
  **token** | **str**| The login token obtained via GET /login/{api_key} | 
  **annotation_id** | **str**| The id of the annotation to modify | 
  **name** | **str**| The new name of the annotation (won&#x27;t change if not set) | [optional] 

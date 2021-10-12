@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **model_id** | **str** |  | [optional] 
 **parent_job_id** | **str** |  | [optional] 
 **reason** | **str** |  | [optional] 
-**result** | [**OneOfJobResult**](OneOfJobResult.md) |  | [optional] 
+**result** | **OneOfJobResult** |  | [optional] 
 **result_type** | [**ResultTypes**](ResultTypes.md) |  | [optional] 
 **starting_time** | **datetime** |  | [optional] 
 **status** | [**Statuses**](Statuses.md) |  | 

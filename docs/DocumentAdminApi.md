@@ -1,4 +1,4 @@
-# leiaapi/generated.DocumentAdminApi
+# leiaapi.generated.DocumentAdminApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
@@ -27,13 +27,13 @@ Uploads a document to Leia API for future use. This method is only accessible to
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
-body = leiaapi/generated.Object() # Object | 
+api_instance = leiaapi.generated.DocumentAdminApi()
+body = leiaapi.generated.Object() # Object | 
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 filename = 'filename_example' # str | The name of the file (if present, extension will be separated from filename in metadata of the document)
 application_id = 'application_id_example' # str | The application that will own the model
@@ -85,12 +85,12 @@ Deletes a document from Leia API. This method is only accessible to admins
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to which the document to delete belongs
 document_id = 'document_id_example' # str | The id of the document to delete
@@ -136,12 +136,12 @@ Updates metadata for a document. This method is only accessible to admins
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to which the document to update belongs
 document_id = 'document_id_example' # str | The id of the document to update
@@ -194,12 +194,12 @@ Retrieves a document from Leia API as metadata. This method is only accessible t
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to which the document to retrieve belongs
 document_id = 'document_id_example' # str | The id of the document to retrieve
@@ -246,12 +246,12 @@ Retrieves the binary contents of a document from Leia API. This method is only a
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to which the document to retrieve belongs
 document_id = 'document_id_example' # str | The id of the document to retrieve
@@ -302,12 +302,12 @@ Retrieves documents which matches the query from Leia API as JSON metadata. This
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 document_id = 'document_id_example' # str | The id of the document (optional)
 application_id = 'application_id_example' # str | The application that owns the documents (optional)
@@ -376,12 +376,12 @@ Retrieves tags from documents. This method is only accessible to admins
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | Restrict to tags belonging to this application (optional)
 
@@ -426,12 +426,12 @@ Retrieves documents which matches the query from Leia API in a zip file. This me
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 document_id = 'document_id_example' # str | The id of the document (optional)
 application_id = 'application_id_example' # str | The application that owns the documents (optional)
@@ -492,12 +492,12 @@ Tags a document. This method is only accessible to admins
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to which the document to tag belongs
 document_id = 'document_id_example' # str | The id of the document
@@ -536,7 +536,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **admin_transform_document_async**
-> Job admin_transform_document_async(token, application_id, document_ids, output_type, body=body, input_tag=input_tag, output_tag=output_tag, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, transform_params=transform_params)
+> Job admin_transform_document_async(token, application_id, document_ids, output_type, body=body, input_tag=input_tag, output_tag=output_tag, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, transform_params=transform_params, block_processing=block_processing)
 
 Asynchronously converts a document within Leia API (admin only)
 
@@ -546,27 +546,28 @@ Asynchronously transforms a document from its current type to the output_type. M
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application id whose documents to transform belong to
 document_ids = ['document_ids_example'] # list[str] | Comma separated list of document ids to process
-output_type = leiaapi/generated.TransformTypes() # TransformTypes | The output type. May be:   * image (extract one image for each page in a PDF file)   * text (Use OCR on an image to get convert it to text)     * To use Google Vision OCR instead of normal LEIA OCR, add \"use_google_vision\":true in transform_params   * text_tree (text in the form of a JSON tree with information about text blocks and their position in the document)     * To use Google Vision OCR instead of normal LEIA OCR, add \"use_google_vision\":true in transform_params   * autorotate (Rotates an image that contains text so that it is in readable orientation)   * trim (Trims white space around a document)   * merge (Merge multiple text documents into a single one with a carriage return '\\n' between them)   * split (Splits a text document into chunks of 1000 words and replaces all spacing characters by single spaces (this number can be changed by setting split_size to another value in transform_params)) 
-body = leiaapi/generated.TransformBody() # TransformBody | All the previous query parameters can also be passed as JSON in the body of the request (optional)
+output_type = leiaapi.generated.TransformTypes() # TransformTypes | The output type. May be:   * image (extract one image for each page in a PDF file)   * text (Use OCR on an image to get convert it to text)     * To use Google Vision OCR instead of normal LEIA OCR, add \"use_google_vision\":true in transform_params   * text_tree (text in the form of a JSON tree with information about text blocks and their position in the document)     * To use Google Vision OCR instead of normal LEIA OCR, add \"use_google_vision\":true in transform_params   * autorotate (Rotates an image that contains text so that it is in readable orientation)   * trim (Trims white space around a document)   * merge (Merge multiple text documents into a single one with a carriage return '\\n' between them)   * split (Splits a text document into chunks of 1000 words and replaces all spacing characters by single spaces (this number can be changed by setting split_size to another value in transform_params)) 
+body = leiaapi.generated.TransformBody() # TransformBody | All the previous query parameters can also be passed as JSON in the body of the request (optional)
 input_tag = 'input_tag_example' # str | The tag of the documents to process. If tag is present, document_ids should contain a single value, and the documents processed will be those where original_id=document_ids[0] and that contain the specified tag (optional)
 output_tag = 'output_tag_example' # str | The tag to add to the documents resulting from the transformation (optional)
 execute_after_id = 'execute_after_id_example' # str | The id of a job that must be in PROCESSED status before this one can be started (used to chain jobs even before the first ones are terminated). If the referenced job becomes FAILED or is CANCELED, this one will fail (optional)
 page_range = 'page_range_example' # str | The pages that should be used in previous job to process this one. Can only be used if execute_after_id is not null. Pages are indexed from 0. Syntax is the same as Python slices syntax (https://docs.python.org/3/whatsnew/2.3.html#extended-slices). Examples :   * Single positive integer : keep only this page (example 4 will keep only page 5 (Remember, pages are indexed from 0))   * Single negative integer : keep only this page, but starting from the end (example -4 will keep only page 7 if there are 10 total pages)   * Range (x:y) : keep only this range of pages (Including x but excluding y, indexed from 0)     Examples       * 2: will keep all pages starting from page 3       * :5 will keep only pages 1 to 5       * 2:5 will keep only pages 3, 4 and 5       * -4: will keep only pages 7 to 10 if there are 10 total pages)       * :-2 will keep only pages 1 to 8 if there are 10 total pages)       * -4:-2 will keep only pages 7 and 8 if there are 10 total pages)   * Stride (::w) : Keep 1 page every w pages starting at the first one (example ::2 will keep only odd pages)   * Range and stride (x:y:w) : Keep 1 page every w pages within range (x:y) (example 1::2 will keep only even pages) You can use multiple ranges of page at once, comma separated (For example, 0,2:5,-2:-1 keeps the 1st page, plus pages 3->5, plus the second to last page)  (optional)
 callback_url = 'callback_url_example' # str | Callback URL that should be called when the job becomes PROCESSED/FAILED/CANCELED. This URL will be called with a HTTP POST method, and the Job object as the payload. Callback server must answer with either a 200 or 204 HTTP response, to acknowledge the callback. Any other response code will be considered as a failure to call the callback. (optional)
 transform_params = NULL # object | Free form parameters for the transformation (optional)
+block_processing = true # bool | If true, blocks processing on the job until /job/{id}/start is called. Default is false (optional)
 
 try:
     # Asynchronously converts a document within Leia API (admin only)
-    api_response = api_instance.admin_transform_document_async(token, application_id, document_ids, output_type, body=body, input_tag=input_tag, output_tag=output_tag, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, transform_params=transform_params)
+    api_response = api_instance.admin_transform_document_async(token, application_id, document_ids, output_type, body=body, input_tag=input_tag, output_tag=output_tag, execute_after_id=execute_after_id, page_range=page_range, callback_url=callback_url, transform_params=transform_params, block_processing=block_processing)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling DocumentAdminApi->admin_transform_document_async: %s\n" % e)
@@ -587,6 +588,7 @@ Name | Type | Description  | Notes
  **page_range** | **str**| The pages that should be used in previous job to process this one. Can only be used if execute_after_id is not null. Pages are indexed from 0. Syntax is the same as Python slices syntax (https://docs.python.org/3/whatsnew/2.3.html#extended-slices). Examples :   * Single positive integer : keep only this page (example 4 will keep only page 5 (Remember, pages are indexed from 0))   * Single negative integer : keep only this page, but starting from the end (example -4 will keep only page 7 if there are 10 total pages)   * Range (x:y) : keep only this range of pages (Including x but excluding y, indexed from 0)     Examples       * 2: will keep all pages starting from page 3       * :5 will keep only pages 1 to 5       * 2:5 will keep only pages 3, 4 and 5       * -4: will keep only pages 7 to 10 if there are 10 total pages)       * :-2 will keep only pages 1 to 8 if there are 10 total pages)       * -4:-2 will keep only pages 7 and 8 if there are 10 total pages)   * Stride (::w) : Keep 1 page every w pages starting at the first one (example ::2 will keep only odd pages)   * Range and stride (x:y:w) : Keep 1 page every w pages within range (x:y) (example 1::2 will keep only even pages) You can use multiple ranges of page at once, comma separated (For example, 0,2:5,-2:-1 keeps the 1st page, plus pages 3-&gt;5, plus the second to last page)  | [optional] 
  **callback_url** | **str**| Callback URL that should be called when the job becomes PROCESSED/FAILED/CANCELED. This URL will be called with a HTTP POST method, and the Job object as the payload. Callback server must answer with either a 200 or 204 HTTP response, to acknowledge the callback. Any other response code will be considered as a failure to call the callback. | [optional] 
  **transform_params** | [**object**](.md)| Free form parameters for the transformation | [optional] 
+ **block_processing** | **bool**| If true, blocks processing on the job until /job/{id}/start is called. Default is false | [optional] 
 
 ### Return type
 
@@ -614,12 +616,12 @@ Untags a document. This method is only accessible to admins
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.DocumentAdminApi()
+api_instance = leiaapi.generated.DocumentAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to which the document to untag belongs
 document_id = 'document_id_example' # str | The id of the document

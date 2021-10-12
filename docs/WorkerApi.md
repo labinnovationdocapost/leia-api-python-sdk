@@ -1,4 +1,4 @@
-# leiaapi/generated.WorkerApi
+# leiaapi.generated.WorkerApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
@@ -18,12 +18,12 @@ Retrieves worker information from Leia API
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.WorkerApi()
+api_instance = leiaapi.generated.WorkerApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 job_type = 'job_type_example' # str | The job_type for which to get worker info
 
@@ -68,12 +68,12 @@ Retrieves worker information from Leia API
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.WorkerApi()
+api_instance = leiaapi.generated.WorkerApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 
 try:

@@ -1,4 +1,4 @@
-# leiaapi/generated.HealthApi
+# leiaapi.generated.HealthApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
@@ -17,12 +17,12 @@ Health check for the application returns a 200 HTTP status when everything is OK
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.HealthApi()
+api_instance = leiaapi.generated.HealthApi()
 
 try:
     # Checks Leia API health

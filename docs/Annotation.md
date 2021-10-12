@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **annotation_type** | [**AnnotationTypes**](AnnotationTypes.md) |  | 
 **application_id** | **str** |  | 
 **creation_time** | **datetime** |  | 
-**document_ids** | **str** |  | [optional] 
+**document_id** | **str** |  | 
 **id** | **str** |  | 
 **name** | **str** |  | [optional] 
 **prediction** | **object** |  | [optional] 

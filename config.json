@@ -1,7 +1,7 @@
 {
     "packageName": "leiaapi.generated",
-    "projectName": "leia-api",
-    "packageVersion": "1.0.0",
+    "projectName": "leia-api-sdk",
+    "packageVersion": "1.0.4",
     "url": "https://api.leia.io/leia/1.0.0/openapi.json",
     "lang": "python"
 }

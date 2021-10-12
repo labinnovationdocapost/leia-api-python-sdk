@@ -14,3 +14,4 @@ from leiaapi.generated.api.job_admin_api import JobAdminApi
 from leiaapi.generated.api.model_api import ModelApi
 from leiaapi.generated.api.model_admin_api import ModelAdminApi
 from leiaapi.generated.api.worker_api import WorkerApi
+from leiaapi.generated.api.worker_admin_api import WorkerAdminApi

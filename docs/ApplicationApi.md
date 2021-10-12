@@ -1,34 +1,35 @@
-# leiaapi/generated.ApplicationApi
+# leiaapi.generated.ApplicationApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**login_application**](ApplicationApi.md#login_application) | **GET** /login/{api_key} | Logs into Leia API
+[**login_application**](ApplicationApi.md#login_application) | **GET** /login/{api_key} | (DEPRECATED) Logs into Leia API
+[**login_application_post**](ApplicationApi.md#login_application_post) | **POST** /login | Logs into Leia API
 [**logout_application**](ApplicationApi.md#logout_application) | **GET** /logout | Logs out from Leia API
 [**who_am_i**](ApplicationApi.md#who_am_i) | **GET** /whoami | Gets the currently connected application
 
 # **login_application**
 > LoginToken login_application(api_key)
 
-Logs into Leia API
+(DEPRECATED) Logs into Leia API
 
-Logs an application into Leia API using its API key. Returns a token that will have to be set in all subsequent requests, to identify the logged in application 
+/!\\ DEPRECATED, use POST /login instead. Logs an application into Leia API using its API key. Returns a token that will have to be set in all subsequent requests, to identify the logged in application 
 
 ### Example
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationApi()
+api_instance = leiaapi.generated.ApplicationApi()
 api_key = 'api_key_example' # str | The API key
 
 try:
-    # Logs into Leia API
+    # (DEPRECATED) Logs into Leia API
     api_response = api_instance.login_application(api_key)
     pprint(api_response)
 except ApiException as e:
@@ -56,6 +57,54 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **login_application_post**
+> LoginToken login_application_post(body)
+
+Logs into Leia API
+
+Logs an application into Leia API using its API key. Returns a token that will have to be set in all subsequent requests, to identify the logged in application 
+
+### Example
+```python
+from __future__ import print_function
+import time
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = leiaapi.generated.ApplicationApi()
+body = leiaapi.generated.LoginBody() # LoginBody | 
+
+try:
+    # Logs into Leia API
+    api_response = api_instance.login_application_post(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ApplicationApi->login_application_post: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | [**LoginBody**](LoginBody.md)|  | 
+
+### Return type
+
+[**LoginToken**](LoginToken.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **logout_application**
 > logout_application(token)
 
@@ -67,12 +116,12 @@ Logs a connected application out of Leia API using its token
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationApi()
+api_instance = leiaapi.generated.ApplicationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 
 try:
@@ -114,12 +163,12 @@ Gets the currently connected application. Also use this method to reset token ti
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationApi()
+api_instance = leiaapi.generated.ApplicationApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 
 try:

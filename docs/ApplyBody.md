@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**block_processing** | **bool** |  | [optional] 
 **callback_headers** | **object** |  | [optional] 
 **callback_url** | **str** |  | [optional] 
 **execute_after_id** | **str** |  | [optional] 

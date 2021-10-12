@@ -1,4 +1,4 @@
-# leiaapi/generated.ApplicationAdminApi
+# leiaapi.generated.ApplicationAdminApi
 
 All URIs are relative to *https://api.leia.io/leia/1.0.0*
 
@@ -23,14 +23,14 @@ Adds a new application to the system. This method is only accessible to admins. 
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
-body = leiaapi/generated.Application() # Application |  (optional)
+body = leiaapi.generated.Application() # Application |  (optional)
 
 try:
     # Adds a new application to the system (admin only)
@@ -73,12 +73,12 @@ Removes a schedule from an application
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The id of the application
 always_on_schedule_id = 'always_on_schedule_id_example' # str | The id of the schedule to delete
@@ -124,12 +124,12 @@ Retrieves a new application from the system. This method is only accessible to a
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The id of the application to delete
 
@@ -173,12 +173,12 @@ Modifies an application already in the system. This method is only accessible to
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The application to modify
 application_name = 'application_name_example' # str | The new name of the application (optional)
@@ -255,12 +255,12 @@ Retrieves a new application from the system. This method is only accessible to a
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The id of the application to retrieve
 
@@ -305,19 +305,19 @@ Retrieves applications from the system. This method is only accessible to admins
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | If specified, filters by application id (optional)
 email = 'email_example' # str | If specified, filters by application email (optional)
 application_name = 'application_name_example' # str | If specified, filters by application name (optional)
 first_name = 'first_name_example' # str | If specified, filters by application first_name (optional)
 last_name = 'last_name_example' # str | If specified, filters by application last_name (optional)
-application_type = leiaapi/generated.ApplicationTypes() # ApplicationTypes | If specified, filters by application application_type (optional)
+application_type = leiaapi.generated.ApplicationTypes() # ApplicationTypes | If specified, filters by application application_type (optional)
 created_after = '2013-10-20T19:20:30+01:00' # datetime | If specified, keeps only applications created after given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss) (optional)
 created_before = '2013-10-20T19:20:30+01:00' # datetime | If specified, keeps only applications created before given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss) (optional)
 dedicated_workers = true # bool | If specified, filters by dedicated_workers value (optional)
@@ -377,12 +377,12 @@ Resets the API key of the application corresponding to application_id, and retur
 ```python
 from __future__ import print_function
 import time
-import leiaapi/generated
-from leiaapi/generated.rest import ApiException
+import leiaapi.generated
+from leiaapi.generated.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = leiaapi/generated.ApplicationAdminApi()
+api_instance = leiaapi.generated.ApplicationAdminApi()
 token = 'token_example' # str | The login token obtained via GET /login/{api_key}
 application_id = 'application_id_example' # str | The id of the application to reset
 
