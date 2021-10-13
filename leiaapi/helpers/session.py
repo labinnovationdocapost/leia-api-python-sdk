@@ -1,7 +1,7 @@
 import logging
 from typing import Optional
 
-from leiaapi.generated import ApiClient, ApplicationApi, Application, LoginToken
+from leiaapi.generated import ApiClient, ApplicationApi, Application, LoginToken, LoginBody
 from .scheduler import scheduled, Scheduler
 
 logger = logging.getLogger(__name__)
@@ -65,7 +65,7 @@ class SessionManager:
         return self
 
     def login(self):
-        login: LoginToken = self._application_api.login_application(self.api_key)
+        login: LoginToken = self._application_api.login_application_post(LoginBody(self.api_key))
         self._application: Optional[Application] = login.application
         self._token: Optional[str] = login.token
 
