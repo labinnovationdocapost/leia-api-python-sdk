@@ -11,6 +11,28 @@
   If you are using git, you can roll back the file to its original state
 - Take caution of the file which will be overwritten (all files in leiaapi/generated + setup.py, README.md, ...)
 - Replace every `collection_formats['document_ids'] = 'multi'` for `collection_formats['document_ids'] = ''`
+- In `rest_api.py` function `request` modify
+  ```python
+  elif isinstance(body, str):
+    request_body = body
+    r = self.pool_manager.request(
+      method, url,
+      body=request_body,
+      preload_content=_preload_content,
+      timeout=timeout,
+      headers=headers)
+   ```
+    by
+  ```python
+  elif isinstance(body, str) or isinstance(body, bytes):
+    request_body = body
+    r = self.pool_manager.request(
+      method, url,
+      body=request_body,
+      preload_content=_preload_content,
+      timeout=timeout,
+      headers=headers)
+   ```
 
 ## Deploy
 - Change version in setup.py
