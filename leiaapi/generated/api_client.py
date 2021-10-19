@@ -114,7 +114,11 @@ class ApiClient(object):
             path_params = self.sanitize_for_serialization(path_params)
             path_params = self.parameters_to_tuples(path_params,
                                                     collection_formats)
-            for k, v in path_params:
+            from itertools import groupby
+            valid_path_params = []
+            for k, g in groupby(path_params, key=lambda x: x[0]):
+                valid_path_params.append((k, ",".join(map(lambda x: x[1], g))))
+            for k, v in valid_path_params:
                 # specified safe chars, encode everything
                 resource_path = resource_path.replace(
                     '{%s}' % k,

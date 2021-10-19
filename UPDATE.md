@@ -10,7 +10,19 @@
   on pycharm use CTRL+SHIT+R to replace in the whole project, but make sure to not touch `config.json` or  
   If you are using git, you can roll back the file to its original state
 - Take caution of the file which will be overwritten (all files in leiaapi/generated + setup.py, README.md, ...)
-- Replace every `collection_formats['document_ids'] = 'multi'` for `collection_formats['document_ids'] = ''`
+- [DEPRECATED] Replace every `collection_formats['document_ids'] = 'multi'` for `collection_formats['document_ids'] = ''`
+- in `leiaapi.generated.api_client.py` around line 120 replace:
+  ```python
+  for k, v in valid_path_params:
+  ```
+  by
+  ```python
+  from itertools import groupby
+  valid_path_params = []
+  for k, g in groupby(path_params, key=lambda x: x[0]):
+      valid_path_params.append((k, ",".join(list(map(lambda x: x[1], g)))))
+  for k, v in valid_path_params:
+  ```
 - In `rest_api.py` function `request` modify
   ```python
   elif isinstance(body, str):
