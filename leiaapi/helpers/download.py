@@ -113,7 +113,7 @@ def get_all_models(token: str, client: Optional[ApiClient] = None) -> List[Model
         except ApiException as e:
             if e.status == 404:
                 logger.warning("API return a 404, maybe because the URl is wrong or because there is no model available")
-                return []
+            return []
 
         if status_code != 200:
             raise Exception(f'GET {resp.url} FAILED: {status_code}')
@@ -128,6 +128,31 @@ def get_all_models(token: str, client: Optional[ApiClient] = None) -> List[Model
         raise Exception(f'Receive more or less data than expected : {len(models)} instead of {total}')
     return models
 
+def get_all_application(token: str, client: Optional[ApiClient] = None) -> List[Model]:
+    total = -1
+    models = []
+    application_api = ApplicationAdminApi(client)
+    status_code = None
+    while len(models) < total or total < 0:
+        try:
+            resp, status_code, headers = application_api.admin_get_applications_with_http_info(token, offset=len(models))
+        except ApiException as e:
+            if e.status == 404:
+                logger.warning("API return a 404, maybe because the URl is wrong or because there is no application available")
+            return []
+
+        if status_code != 200:
+            raise Exception(f'GET {resp.url} FAILED: {status_code}')
+
+        firstlast, total = headers["Content-Range"].split("/")
+        total = int(total)
+        logger.info(f"Model pagination: {len(models)}/{total}")
+
+        models.extend(resp)
+    logger.info(f"Models found: {len(models)}")
+    if len(models) != total:
+        raise Exception(f'Receive more or less data than expected : {len(models)} instead of {total}')
+    return models
 
 def download_models(token, save_folder: Optional[Union[Path, str]] = None, whitelist: Set[str] = (), blacklist: Set[str] = (), overwrite: bool = False,
                     use_tqdm: bool = True, keep_model: bool = True, stop_if_error: bool = False, client: Optional[ApiClient] = None,
@@ -136,8 +161,8 @@ def download_models(token, save_folder: Optional[Union[Path, str]] = None, white
     # if len(whitelist) > 0 and len(blacklist) > 0:
     #     raise ValueError("whitelist and blacklist cannot be set at the same time")
 
-    application_api = ApplicationAdminApi(client)
-    applications: Dict[str, Application] = {app.id: app for app in application_api.admin_get_applications(token)}
+    applications: Dict[str, Application] = {app.id: app for app in get_all_application(token, client)}
+    print(applications.keys())
     models: List[Model] = get_all_models(token=token, client=client)
 
     if save_folder is not None:
