@@ -69,12 +69,13 @@ class JobResult(BaseModel):
         else:
             match += 1
 
-        # validate data type: object
-        try:
-            instance.oneof_schema_4_validator = v
-            match += 1
-        except ValidationError as e:
-            error_messages.append(str(e))
+        if match == 0:
+            # validate data type: object
+            try:
+                instance.oneof_schema_4_validator = v
+                match += 1
+            except ValidationError as e:
+                error_messages.append(str(e))
         if match > 1:
             # more than 1 match
             raise ValueError("Multiple matches found when deserializing the JSON string into JobResult with oneOf schemas: Classification, Document, List[Document], object. Details: " + ", ".join(error_messages))
@@ -116,15 +117,17 @@ class JobResult(BaseModel):
             match += 1
         except ValidationError as e:
             error_messages.append(str(e))
-        # deserialize data into object
-        try:
-            # validation
-            instance.oneof_schema_4_validator = json.loads(json_str)
-            # assign value to actual_instance
-            instance.actual_instance = instance.oneof_schema_4_validator
-            match += 1
-        except ValidationError as e:
-            error_messages.append(str(e))
+
+        if match == 0:
+            # deserialize data into object
+            try:
+                # validation
+                instance.oneof_schema_4_validator = json.loads(json_str)
+                # assign value to actual_instance
+                instance.actual_instance = instance.oneof_schema_4_validator
+                match += 1
+            except ValidationError as e:
+                error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match

@@ -49,7 +49,7 @@ class DocumentApi(object):
         self.api_client = api_client
 
     @validate_arguments
-    def create_document(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], filename : Annotated[StrictStr, Field(..., description="The name of the file (if present, extension will be separated from filename in metadata of the document)")], body : StrictStr, b64 : Annotated[Optional[StrictBool], Field(description="Set to true if the body is b64 encoded")] = None, ttl : Annotated[Optional[StrictInt], Field(description="The TTL (in seconds, not less than 60) for the document (if present, the document and any sub documents, annotations, or jobs linked to it will be deleted after the TTL is expired)")] = None, tags : Annotated[Optional[List[StrictStr]], Field(description="The tags of the document")] = None, **kwargs) -> Document:  # noqa: E501
+    def create_document(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], filename : Annotated[StrictStr, Field(..., description="The name of the file (if present, extension will be separated from filename in metadata of the document)")], body : bytes, b64 : Annotated[Optional[StrictBool], Field(description="Set to true if the body is b64 encoded")] = None, ttl : Annotated[Optional[StrictInt], Field(description="The TTL (in seconds, not less than 60) for the document (if present, the document and any sub documents, annotations, or jobs linked to it will be deleted after the TTL is expired)")] = None, tags : Annotated[Optional[List[StrictStr]], Field(description="The tags of the document")] = None, **kwargs) -> Document:  # noqa: E501
         """Uploads a document to the Leia API  # noqa: E501
 
         Uploads a document to Leia API for future use   # noqa: E501
@@ -90,7 +90,7 @@ class DocumentApi(object):
         return self.create_document_with_http_info(token, filename, body, b64, ttl, tags, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_document_with_http_info(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], filename : Annotated[StrictStr, Field(..., description="The name of the file (if present, extension will be separated from filename in metadata of the document)")], body : StrictStr, b64 : Annotated[Optional[StrictBool], Field(description="Set to true if the body is b64 encoded")] = None, ttl : Annotated[Optional[StrictInt], Field(description="The TTL (in seconds, not less than 60) for the document (if present, the document and any sub documents, annotations, or jobs linked to it will be deleted after the TTL is expired)")] = None, tags : Annotated[Optional[List[StrictStr]], Field(description="The tags of the document")] = None, **kwargs):  # noqa: E501
+    def create_document_with_http_info(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], filename : Annotated[StrictStr, Field(..., description="The name of the file (if present, extension will be separated from filename in metadata of the document)")], body : bytes, b64 : Annotated[Optional[StrictBool], Field(description="Set to true if the body is b64 encoded")] = None, ttl : Annotated[Optional[StrictInt], Field(description="The TTL (in seconds, not less than 60) for the document (if present, the document and any sub documents, annotations, or jobs linked to it will be deleted after the TTL is expired)")] = None, tags : Annotated[Optional[List[StrictStr]], Field(description="The tags of the document")] = None, **kwargs):  # noqa: E501
         """Uploads a document to the Leia API  # noqa: E501
 
         Uploads a document to Leia API for future use   # noqa: E501
@@ -706,7 +706,7 @@ class DocumentApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def get_document_contents(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], document_id : Annotated[StrictStr, Field(..., description="The id of the document to retrieve")], max_size : Annotated[Optional[StrictInt], Field(description="Restrict the size of the image to get (only applicable for documents of type image). The largest dimension of the image will be capped to this dimension")] = None, jpeg_compression : Annotated[Optional[StrictInt], Field(description="JPEG compression rate, in percent (only applicable for documents of type image)")] = None, **kwargs) -> str:  # noqa: E501
+    def get_document_contents(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], document_id : Annotated[StrictStr, Field(..., description="The id of the document to retrieve")], max_size : Annotated[Optional[StrictInt], Field(description="Restrict the size of the image to get (only applicable for documents of type image). The largest dimension of the image will be capped to this dimension")] = None, jpeg_compression : Annotated[Optional[StrictInt], Field(description="JPEG compression rate, in percent (only applicable for documents of type image)")] = None, **kwargs) -> bytes:  # noqa: E501
         """Retrieves a document from Leia API  # noqa: E501
 
         Retrieves a document's binary content from Leia API   # noqa: E501
@@ -849,7 +849,7 @@ class DocumentApi(object):
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "str",
+            '200': "bytes",
             '401': None,
             '403': None,
             '404': None,
@@ -1249,7 +1249,7 @@ class DocumentApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def get_documents_zip(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], document_id : Annotated[Optional[StrictStr], Field(description="The id the document to retrieve")] = None, filename : Annotated[Optional[StrictStr], Field(description="The file name of the documents to retrieve")] = None, extension : Annotated[Optional[StrictStr], Field(description="The extension of the documents to retrieve")] = None, mime_type : Annotated[Optional[StrictStr], Field(description="Filters by MIME type")] = None, original_id : Annotated[Optional[StrictStr], Field(description="Filters by original id")] = None, tags : Annotated[Optional[List[StrictStr]], Field(description="If specified, filters the documents by tag")] = None, created_after : Annotated[Optional[datetime], Field(description="If specified, keeps only documents created after given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss)")] = None, created_before : Annotated[Optional[datetime], Field(description="If specified, keeps only documents created before given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss)")] = None, **kwargs) -> str:  # noqa: E501
+    def get_documents_zip(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], document_id : Annotated[Optional[StrictStr], Field(description="The id the document to retrieve")] = None, filename : Annotated[Optional[StrictStr], Field(description="The file name of the documents to retrieve")] = None, extension : Annotated[Optional[StrictStr], Field(description="The extension of the documents to retrieve")] = None, mime_type : Annotated[Optional[StrictStr], Field(description="Filters by MIME type")] = None, original_id : Annotated[Optional[StrictStr], Field(description="Filters by original id")] = None, tags : Annotated[Optional[List[StrictStr]], Field(description="If specified, filters the documents by tag")] = None, created_after : Annotated[Optional[datetime], Field(description="If specified, keeps only documents created after given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss)")] = None, created_before : Annotated[Optional[datetime], Field(description="If specified, keeps only documents created before given UTC timestamp (ISO 8601 format : yyyy-MM-ddThh:mm:ss)")] = None, **kwargs) -> bytes:  # noqa: E501
         """Retrieves documents from Leia API (paginated)  # noqa: E501
 
         Retrieves documents which matches the query from Leia API in a zip file  # noqa: E501
@@ -1428,7 +1428,7 @@ class DocumentApi(object):
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "str",
+            '200': "bytes",
             '401': None,
             '403': None,
             '404': None,

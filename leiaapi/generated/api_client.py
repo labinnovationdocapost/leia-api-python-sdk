@@ -307,6 +307,8 @@ class ApiClient(object):
         # save response body into a tmp file and return the instance
         if response_type == "file":
             return self.__deserialize_file(response)
+        if response_type == "bytes":
+            return response.data
 
         # fetch data from response object
         try:
@@ -496,7 +498,6 @@ class ApiClient(object):
 
         for k, v in params.items() if isinstance(params, dict) else params:  # noqa: E501
             if isinstance(v, Enum):
-                print(v)
                 v = v.value
             if k in collection_formats:
                 collection_format = collection_formats[k]
@@ -528,7 +529,6 @@ class ApiClient(object):
         if collection_formats is None:
             collection_formats = {}
         for k, v in params.items() if isinstance(params, dict) else params:  # noqa: E501
-            print(k,v)
             if isinstance(v, (int, float)):
                 v = str(v)
             if isinstance(v, bool):

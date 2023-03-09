@@ -3,7 +3,7 @@
 - Be sure that you have a version equal or superior of 6.4.0 (ex: openapi-generator-cli-6.4.0.jar)
 - Run the following command, replacing \<folderName\> by the name of the folder where the project is 
     ```shell<<<<
-    java -jar .\openapi-generator-cli-6.4.0.jar generate --skip-validate-spec -g python -o "~\LeiaApiSdk" -i "https://dev.leia.id360docaposte.com/leia/1.0.0/openapi.json" --additional-properties=packageName=leiaapi.generated
+    java -jar .\openapi-generator-cli-6.4.0.jar generate --skip-validate-spec -g python-nextgen -o "~\LeiaApiSdk" -i "https://dev.leia.id360docaposte.com/leia/1.0.0/openapi.json" --additional-properties=packageName=leiaapi.generated
     ```
 - If you set the output folder in the current project take caution of the file which will be overwritten (all files in leiaapi/generated + setup.py, README.md, ...)
 - If you have used a different folder, copy everything from leiaapi.generated to the same folder in the project
@@ -26,8 +26,11 @@
       print(v)
       v = v.value
   ```
+- Les tests `test_application_api` doivent fonctionner. Il est nécéssaire de modifier le code pour qu'ils fonctionnent. Exemples: 
+  - la plupart des changement sont surtout pour certain retour qui sont en str au lieu de bytes
+  - dans `actual_instance_must_validate_oneof` et `from_json` de `job_result` rajoutez `if match == 0:` au desus du bloc commencant par `# deserialize data into object`
 
-## Deploy
+## Deploy-
 - Change version in setup.py
 - `python3 -m pip install --upgrade build`
 - `python3 -m pip install --user --upgrade twine`

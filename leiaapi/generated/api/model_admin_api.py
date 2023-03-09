@@ -1057,7 +1057,7 @@ class ModelAdminApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def admin_get_model_contents(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], application_id : Annotated[StrictStr, Field(..., description="The application to which the model to retrieve belongs")], model_id : Annotated[StrictStr, Field(..., description="The id or the short name of the model to get")], **kwargs) -> str:  # noqa: E501
+    def admin_get_model_contents(self, token : Annotated[StrictStr, Field(..., description="The login token obtained via POST /login/")], application_id : Annotated[StrictStr, Field(..., description="The application to which the model to retrieve belongs")], model_id : Annotated[StrictStr, Field(..., description="The id or the short name of the model to get")], **kwargs) -> bytes:  # noqa: E501
         """Get a model (admin only)  # noqa: E501
 
         Get a model in the system that the application can access. This method is only accessible to admins  # noqa: E501
@@ -1193,7 +1193,7 @@ class ModelAdminApi(object):
         _auth_settings = []  # noqa: E501
 
         _response_types_map = {
-            '200': "str",
+            '200': "bytes",
             '401': None,
             '404': None,
         }
