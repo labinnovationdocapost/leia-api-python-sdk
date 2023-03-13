@@ -19,7 +19,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "leiaapi.generated"
+NAME = "leia_api_sdk"
 VERSION = "1.1.1"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
