@@ -1,52 +1,36 @@
 ## Update the library
-- Download [swagger-codegen](https://github.com/swagger-api/swagger-codegen)
-- Be sure that you have a version equal or superior of 3.* (ex: swagger-codegen-cli-3.0.25)
+- Download [swagger-codegen](https://openapi-generator.tech/docs/installation)
+- Be sure that you have a version equal or superior of 6.4.0 (ex: openapi-generator-cli-6.4.0.jar)
 - Run the following command, replacing \<folderName\> by the name of the folder where the project is 
     ```shell<<<<
-    java -jar .\swagger-codegen-cli-3.0.25.jar generate -l python -o <folderName> -i https://api.leia.io/leia/1.0.0/openapi.json -c <folderName>\config.json
+    java -jar .\openapi-generator-cli-6.4.0.jar generate --skip-validate-spec -g python-nextgen -o "~\LeiaApiSdk" -i "https://dev.leia.id360docaposte.com/leia/1.0.0/openapi.json" --additional-properties=packageName=leiaapi.generated
     ```
-- until version 1.0.25 `packageName` in `config.json` must be of the form `module1/module2/module3` which corrupt the output file, but make the folder hierarchy correct.
-- To patch it replace all `leiaapi/generated` by `leiaapi.generated`  
-  on pycharm use CTRL+SHIT+R to replace in the whole project, but make sure to not touch `config.json` or  
-  If you are using git, you can roll back the file to its original state
-- Take caution of the file which will be overwritten (all files in leiaapi/generated + setup.py, README.md, ...)
-- [DEPRECATED] Replace every `collection_formats['document_ids'] = 'multi'` for `collection_formats['document_ids'] = ''`
-- in `leiaapi.generated.api_client.py` around line 120 replace:
+- If you set the output folder in the current project take caution of the file which will be overwritten (all files in leiaapi/generated + setup.py, README.md, ...)
+- If you have used a different folder, copy everything from leiaapi.generated to the same folder in the project
+- Modify `leiaapi.generated.models.model_input_types.ModelInputTypes` to include `LIST_PDF = 'list[pdf]'`
+- Modify `leiaapi.generated.api.api_client.ApiClient.parameters_to_url_query` to add 
   ```python
-  for k, v in valid_path_params:
+  if isinstance(v, bool):
+    v = str(v).lower()
+  # add this
+  if isinstance(v, dict):
+    for l, b in v.items():
+      new_params.append((l,b))
+    continue
   ```
-  by
+- Modify `leiaapi.generated.api.api_client.ApiClient.parameters_to_tuples` to add 
   ```python
-  from itertools import groupby
-  valid_path_params = []
-  for k, g in groupby(path_params, key=lambda x: x[0]):
-      valid_path_params.append((k, ",".join(list(map(lambda x: x[1], g)))))
-  for k, v in valid_path_params:
+  for k, v in params.items() if isinstance(params, dict) else params:  # noqa: E501
+    # Add this
+    if isinstance(v, Enum):
+      print(v)
+      v = v.value
   ```
-- In `rest_api.py` function `request` modify
-  ```python
-  elif isinstance(body, str):
-    request_body = body
-    r = self.pool_manager.request(
-      method, url,
-      body=request_body,
-      preload_content=_preload_content,
-      timeout=timeout,
-      headers=headers)
-   ```
-    by
-  ```python
-  elif isinstance(body, str) or isinstance(body, bytes):
-    request_body = body
-    r = self.pool_manager.request(
-      method, url,
-      body=request_body,
-      preload_content=_preload_content,
-      timeout=timeout,
-      headers=headers)
-   ```
+- Les tests `test_application_api` doivent fonctionner. Il est nécéssaire de modifier le code pour qu'ils fonctionnent. Exemples: 
+  - la plupart des changement sont surtout pour certain retour qui sont en str au lieu de bytes
+  - dans `actual_instance_must_validate_oneof` et `from_json` de `job_result` rajoutez `if match == 0:` au desus du bloc commencant par `# deserialize data into object`
 
-## Deploy
+## Deploy-
 - Change version in setup.py
 - `python3 -m pip install --upgrade build`
 - `python3 -m pip install --user --upgrade twine`

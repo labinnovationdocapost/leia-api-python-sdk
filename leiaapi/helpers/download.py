@@ -6,11 +6,9 @@ from typing import Optional, Union, Dict, List, Tuple, Set, Callable
 from tqdm.auto import tqdm
 from urllib3 import HTTPResponse
 
-from leiaapi.generated.api.application_admin_api import ApplicationAdminApi
-from leiaapi.generated.api.model_admin_api import ModelAdminApi
+from leiaapi.generated.api import ApplicationAdminApi, ModelAdminApi
 from leiaapi.generated.api_client import ApiClient
-from leiaapi.generated.models.application import Application
-from leiaapi.generated.models.model import Model
+from leiaapi.generated.models import Application, Model
 from leiaapi.generated.rest import ApiException
 
 logger = logging.getLogger(__name__)
@@ -55,7 +53,7 @@ def download_model(token: str, model: Union[Model, Tuple[str, str], Tuple[str, s
     while resp is None or resp.status != 200:
         # logger.info(f'Calling {api.admin_get_model_contents.settings["endpoint_path"].format(**model._data_store, model_id=model.id)}')
 
-        resp = api.admin_get_model_contents(token, model.application_id, model.id, _preload_content=False)
+        resp = api.admin_get_model_contents_with_http_info(token, model.application_id, model.id)
 
         if resp.status != 200:
             # if exit_on_error:

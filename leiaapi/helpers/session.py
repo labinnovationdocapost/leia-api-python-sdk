@@ -3,8 +3,10 @@ from typing import Optional
 
 import leiaapi.generated.api_client
 import leiaapi.generated.rest
-from leiaapi.generated import ApiClient, ApplicationApi, Application, LoginToken, LoginBody
+from leiaapi.generated import ApiClient
 from .scheduler import scheduled, Scheduler
+from ..generated.api import ApplicationApi
+from ..generated.models import Application, LoginBody, LoginToken
 
 logger = logging.getLogger(__name__)
 
@@ -92,14 +94,14 @@ class SessionManager:
         return self
 
     def login(self):
-        login: LoginToken = self._application_api.login_application_post(LoginBody(self.api_key))
+        login = self._application_api.login_application_post(LoginBody(api_key=self.api_key))
         self._application: Optional[Application] = login.application
         self._token: Optional[str] = login.token
 
         if self._auto_update_token:
             @scheduled(TIME_BETWEEN_TOKEN_UPDATE)
             def renew():
-                self._application_api.who_am_i(self.token)
+                self._application_api.who_am_i(token=self.token)
 
             self._scheduler = renew
         return self
