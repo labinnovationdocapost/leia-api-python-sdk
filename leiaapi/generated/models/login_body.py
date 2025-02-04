@@ -30,9 +30,10 @@ class LoginBody(BaseModel):
     api_key: StrictStr = ...
     __properties = ["api_key"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -62,9 +63,9 @@ class LoginBody(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return LoginBody.parse_obj(obj)
+            return LoginBody.model_validate(obj)
 
-        _obj = LoginBody.parse_obj({
+        _obj = LoginBody.model_validate({
             "api_key": obj.get("api_key")
         })
         return _obj

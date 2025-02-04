@@ -36,9 +36,10 @@ class TrainBody(BaseModel):
     model_params: Optional[Dict[str, Any]] = None
     __properties = ["callback_headers", "callback_url", "documents_tag", "execute_after_id", "model_module", "model_name", "model_params"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -68,9 +69,9 @@ class TrainBody(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return TrainBody.parse_obj(obj)
+            return TrainBody.model_validate(obj)
 
-        _obj = TrainBody.parse_obj({
+        _obj = TrainBody.model_validate({
             "callback_headers": obj.get("callback_headers"),
             "callback_url": obj.get("callback_url"),
             "documents_tag": obj.get("documents_tag"),

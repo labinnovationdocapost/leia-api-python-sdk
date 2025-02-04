@@ -38,9 +38,10 @@ class ApplyBody(BaseModel):
     tag: Optional[StrictStr] = None
     __properties = ["block_processing", "callback_headers", "callback_url", "execute_after_id", "format_type", "model_params", "page_range", "tag"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,9 +71,9 @@ class ApplyBody(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return ApplyBody.parse_obj(obj)
+            return ApplyBody.model_validate(obj)
 
-        _obj = ApplyBody.parse_obj({
+        _obj = ApplyBody.model_validate({
             "block_processing": obj.get("block_processing"),
             "callback_headers": obj.get("callback_headers"),
             "callback_url": obj.get("callback_url"),

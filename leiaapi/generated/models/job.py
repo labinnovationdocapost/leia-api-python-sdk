@@ -47,9 +47,10 @@ class Job(BaseModel):
     status: Statuses = ...
     __properties = ["application_id", "callback_url", "creation_time", "document_ids", "execute_after_id", "finished_time", "id", "job_type", "model_id", "parent_job_id", "reason", "result", "result_type", "starting_time", "status"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -82,9 +83,9 @@ class Job(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Job.parse_obj(obj)
+            return Job.model_validate(obj)
 
-        _obj = Job.parse_obj({
+        _obj = Job.model_validate({
             "application_id": obj.get("application_id"),
             "callback_url": obj.get("callback_url"),
             "creation_time": obj.get("creation_time"),

@@ -33,9 +33,10 @@ class ConditionalBody(BaseModel):
     rules: Optional[Dict[str, Any]] = None
     __properties = ["block_processing", "callback_headers", "callback_url", "rules"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -65,9 +66,9 @@ class ConditionalBody(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return ConditionalBody.parse_obj(obj)
+            return ConditionalBody.model_validate(obj)
 
-        _obj = ConditionalBody.parse_obj({
+        _obj = ConditionalBody.model_validate({
             "block_processing": obj.get("block_processing"),
             "callback_headers": obj.get("callback_headers"),
             "callback_url": obj.get("callback_url"),

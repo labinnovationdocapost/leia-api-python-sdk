@@ -42,9 +42,10 @@ class Document(BaseModel):
     tags: Optional[List[StrictStr]] = None
     __properties = ["application_id", "creation_time", "expiration_time", "extension", "filename", "id", "md5sum", "mime_type", "original_id", "page", "rotation_angle", "size", "tags"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -74,9 +75,9 @@ class Document(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Document.parse_obj(obj)
+            return Document.model_validate(obj)
 
-        _obj = Document.parse_obj({
+        _obj = Document.model_validate({
             "application_id": obj.get("application_id"),
             "creation_time": obj.get("creation_time"),
             "expiration_time": obj.get("expiration_time"),

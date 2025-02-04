@@ -32,9 +32,10 @@ class Worker(BaseModel):
     statuses: List[StrictStr] = ...
     __properties = ["job_type", "number", "statuses"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +65,9 @@ class Worker(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Worker.parse_obj(obj)
+            return Worker.model_validate(obj)
 
-        _obj = Worker.parse_obj({
+        _obj = Worker.model_validate({
             "job_type": obj.get("job_type"),
             "number": obj.get("number"),
             "statuses": obj.get("statuses")

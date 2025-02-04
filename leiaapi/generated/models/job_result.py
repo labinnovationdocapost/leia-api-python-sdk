@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 
 from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator
 from leiaapi.generated.models.classification import Classification
 from leiaapi.generated.models.document import Document
 from typing import Any, List
@@ -41,12 +41,14 @@ class JobResult(BaseModel):
     # data type: object
     oneof_schema_4_validator: Optional[Any] = None
     actual_instance: Any
-    one_of_schemas: List[str] = Field(JOBRESULT_ONE_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Field(JOBRESULT_ONE_OF_SCHEMAS, frozen=True)
 
-    class Config:
-        validate_assignment = True
+    model_config = {
+        "validate_assignment": True
+    }
 
-    @validator('actual_instance')
+    @field_validator('actual_instance')
+    @classmethod
     def actual_instance_must_validate_oneof(cls, v):
         instance = cls()
         error_messages = []

@@ -38,9 +38,10 @@ class Annotation(BaseModel):
     tags: Optional[List[StrictStr]] = None
     __properties = ["annotation_type", "application_id", "creation_time", "document_id", "id", "name", "prediction", "tags"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,9 +71,9 @@ class Annotation(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Annotation.parse_obj(obj)
+            return Annotation.model_validate(obj)
 
-        _obj = Annotation.parse_obj({
+        _obj = Annotation.model_validate({
             "annotation_type": obj.get("annotation_type"),
             "application_id": obj.get("application_id"),
             "creation_time": obj.get("creation_time"),

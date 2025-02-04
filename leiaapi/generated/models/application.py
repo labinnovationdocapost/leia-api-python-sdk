@@ -43,9 +43,10 @@ class Application(BaseModel):
     last_name: StrictStr = ...
     __properties = ["api_key", "application_name", "application_type", "creation_time", "dedicated_workers", "dedicated_workers_max_models", "dedicated_workers_ttl", "default_job_callback_url", "email", "first_name", "id", "job_counts", "last_name"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -75,9 +76,9 @@ class Application(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Application.parse_obj(obj)
+            return Application.model_validate(obj)
 
-        _obj = Application.parse_obj({
+        _obj = Application.model_validate({
             "api_key": obj.get("api_key"),
             "application_name": obj.get("application_name"),
             "application_type": obj.get("application_type"),

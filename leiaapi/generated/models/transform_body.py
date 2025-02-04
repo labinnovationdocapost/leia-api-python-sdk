@@ -37,9 +37,10 @@ class TransformBody(BaseModel):
     transform_params: Optional[Dict[str, Any]] = None
     __properties = ["block_processing", "callback_headers", "callback_url", "execute_after_id", "input_tag", "output_tag", "page_range", "transform_params"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,9 +70,9 @@ class TransformBody(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return TransformBody.parse_obj(obj)
+            return TransformBody.model_validate(obj)
 
-        _obj = TransformBody.parse_obj({
+        _obj = TransformBody.model_validate({
             "block_processing": obj.get("block_processing"),
             "callback_headers": obj.get("callback_headers"),
             "callback_url": obj.get("callback_url"),

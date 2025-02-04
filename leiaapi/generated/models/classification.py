@@ -32,9 +32,10 @@ class Classification(BaseModel):
     score: confloat(le=1, ge=0, strict=True) = ...
     __properties = ["accuracy", "category", "score"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +65,9 @@ class Classification(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Classification.parse_obj(obj)
+            return Classification.model_validate(obj)
 
-        _obj = Classification.parse_obj({
+        _obj = Classification.model_validate({
             "accuracy": obj.get("accuracy"),
             "category": obj.get("category"),
             "score": obj.get("score")

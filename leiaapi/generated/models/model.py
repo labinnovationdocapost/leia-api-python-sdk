@@ -54,9 +54,10 @@ class Model(BaseModel):
     ttl: Optional[int] = Field(None, description="The TTL of the workers hosting this model")
     __properties = ["allow_all_applications", "allowed_application_ids", "always_on_workers", "application_id", "cores", "creation_time", "description", "documentation", "id", "input_types", "md5sum", "memory", "model_clazz", "model_module", "model_type", "name", "output_format", "short_name", "size", "speed", "tags", "ttl"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -86,9 +87,9 @@ class Model(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return Model.parse_obj(obj)
+            return Model.model_validate(obj)
 
-        _obj = Model.parse_obj({
+        _obj = Model.model_validate({
             "allow_all_applications": obj.get("allow_all_applications"),
             "allowed_application_ids": obj.get("allowed_application_ids"),
             "always_on_workers": obj.get("always_on_workers"),

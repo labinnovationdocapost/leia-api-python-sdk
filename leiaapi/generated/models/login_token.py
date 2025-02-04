@@ -32,9 +32,10 @@ class LoginToken(BaseModel):
     token: StrictStr = ...
     __properties = ["application", "token"]
 
-    class Config:
-        allow_population_by_field_name = True
-        validate_assignment = True
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -67,9 +68,9 @@ class LoginToken(BaseModel):
             return None
 
         if type(obj) is not dict:
-            return LoginToken.parse_obj(obj)
+            return LoginToken.model_validate(obj)
 
-        _obj = LoginToken.parse_obj({
+        _obj = LoginToken.model_validate({
             "application": Application.from_dict(obj.get("application")) if obj.get("application") is not None else None,
             "token": obj.get("token")
         })
