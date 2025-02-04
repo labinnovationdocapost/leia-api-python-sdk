@@ -20,12 +20,12 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "leia_api_sdk"
-VERSION = "1.1.1"
+VERSION = "1.1.3"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3",
     "python-dateutil >= 2.5.3",
-    "pydantic >= 1.10.2",
+    "pydantic == 2.10.4",
     "aenum >= 3.1.11"
 ]
 
